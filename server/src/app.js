@@ -20,17 +20,6 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const isLoggedIn = (req, res, next) => {
-  const login = true;
-
-  if (login) {
-    req.body.id = 101;
-    next();
-  } else {
-    return res.status(401).json({ message: "unauthorized user" });
-  }
-  console.log("middleware is working");
-};
 
 app.get("/test", (req, res) => {
   res.status(200).send({
