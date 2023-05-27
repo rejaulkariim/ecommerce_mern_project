@@ -38,7 +38,7 @@ app.get("/test", (req, res) => {
   });
 });
 
-app.get("/api/users", isLoggedIn, (req, res) => {
+app.get("/api/users", (req, res) => {
   console.log(req.body.id);
   res.status(200).send({
     message: "user profile is returned",
