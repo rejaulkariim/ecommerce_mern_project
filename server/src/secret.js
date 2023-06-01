@@ -7,4 +7,4 @@ const mongodbURL =
 const defaultImagePath =
   process.env.DEFAULT_IMAGE_PATH || "public/images/users/default-user.jpg";
 
-module.exports = { serverPort, mongodbURL,defaultImagePath };
+module.exports = { serverPort, mongodbURL, defaultImagePath };

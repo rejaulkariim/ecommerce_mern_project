@@ -16,3 +16,4 @@
 12. MVC Archirecture (Model Views Controller)
 13. Connect to MongoDb database
 14. Schema and model for user
+15. Create seed route for testing 
