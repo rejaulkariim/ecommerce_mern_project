@@ -17,3 +17,5 @@
 13. Connect to MongoDb database
 14. Schema and model for user
 15. Create seed route for testing 
+16. GET /api/users -> isAdmin -> getAllUsers -> searchByName -> paginations
+17. ResponseHandler controller for error or success

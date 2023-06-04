@@ -23,7 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // userRouter
-
 app.use("/api/users", userRouter);
 app.use("/api/seed", seedRouter);
 
@@ -44,6 +43,8 @@ app.use((err, req, res, next) => {
     success: false,
     message: err.message,
   });
+
+  return errorResponse(res, { statusCode: err.status, message: err.message });
 });
 
 module.exports = app;
