@@ -20,3 +20,4 @@ const successResponse = (
 };
 
 module.exports = { errorResponse, successResponse };
+

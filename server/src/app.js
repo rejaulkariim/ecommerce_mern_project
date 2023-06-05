@@ -22,7 +22,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// userRouter
+// user router
 app.use("/api/users", userRouter);
 app.use("/api/seed", seedRouter);
 
