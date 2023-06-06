@@ -20,3 +20,4 @@
 16. GET /api/users -> isAdmin -> getAllUsers -> searchByName -> paginations
 17. ResponseHandler controller for error or success
 18. GET /api/users/:id -> get a single user by id
+19. 
