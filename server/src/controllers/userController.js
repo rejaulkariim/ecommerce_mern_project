@@ -1,15 +1,15 @@
 const createError = require("http-errors");
 const User = require("../models/userModel");
 const { successResponse } = require("./responseController");
-const mongoose = require("mongoose");
-const { findUserById } = require("../services/findUserbyId");
+const { findWithId } = require("../services/findItem");
+const fs = require("fs");
 
 // get all users
 const getUsers = async (req, res, next) => {
   try {
     const search = req.query.search || "";
     const page = req.query.page || 1;
-    const limit = Number(req.query.limit) || 1;
+    const limit = Number(req.query.limit) || 5;
 
     // search users
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
@@ -55,8 +55,9 @@ const getUsers = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   try {
     const id = req.params.id;
+    const options = { password: 0 };
 
-    const user = await findUserById(id);
+    const user = await findWithId(id, options);
 
     return successResponse(res, {
       statusCode: 200,
@@ -68,4 +69,38 @@ const getUser = async (req, res, next) => {
   }
 };
 
-module.exports = { getUsers, getUser };
+// delete a single user by id
+const deleteUser = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const options = { password: 0 };
+
+    const user = await findWithId(id, options);
+
+    const userImagePath = user.image;
+    fs.access(userImagePath, (err) => {
+      if (err) {
+        console.error("user image does not exist");
+      } else {
+        fs.unlink(userImagePath, (err) => {
+          if (err) throw err;
+          console.log("user image was deleted");
+        });
+      }
+    });
+
+    await User.findByIdAndDelete({
+      _id: id,
+      isAdmin: false,
+    });
+
+    return successResponse(res, {
+      statusCode: 200,
+      message: "user was deleted successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getUsers, getUser, deleteUser };
